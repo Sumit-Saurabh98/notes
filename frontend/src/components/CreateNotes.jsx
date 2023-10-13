@@ -10,7 +10,7 @@ import {
   useDisclosure,
   Text,
   ButtonGroup,
-  InputRightElement,
+  useToast,
   Input,
   FormLabel,
   InputGroup,
@@ -18,16 +18,44 @@ import {
   FormControl,
   Textarea,
 } from "@chakra-ui/react";
+import axios from "axios";
 import React, { useState } from "react";
 
 function CreateNotes(props) {
+    const toast = useToast()
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [loading, setLoading] = useState(false)
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const createNotes = async()=>{
+    const new_notes = {title, description}
+    try {
+        setLoading(true)
+    await axios.post(`${process.env.REACT_APP_BASE_URL}/notes/create`, new_notes)
+    .then(()=>{
+        setLoading(false)
+        toast({
+            title: "Notes Created",
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+          });
+    })
+    } catch (error) {
+        setLoading(false)
+        toast({
+            title: "Soothing wrong, Try again",
+            status: "error",
+            duration: 2000,
+            isClosable: true,
+          });
+    }
+  }
+
   const handleSubmit = (e) =>{
     e.preventDefault()
+    createNotes()
   }
   return (
     <Box bg="#262626">
@@ -50,9 +78,9 @@ function CreateNotes(props) {
           <FormControl>
             <FormLabel mb={"5px"}> Email </FormLabel>
             <Input
-              id="email"
+              id="title"
               mb={"10px"}
-              type="email"
+              type="text"
               placeholder="Email"
               focusBorderColor="yellow.600"
               required
