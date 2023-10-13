@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Text, Image } from "@chakra-ui/react";
 import logo from "../logo/logo.png";
+import { AuthContext } from "../context/AuthContextProvider";
+import { useNavigate } from "react-router-dom";
+import CreateNotes from "./CreateNotes";
 
 const Navbar = () => {
+    const navigate = useNavigate()
+    const {auth, setAuth} = useContext(AuthContext)
+
+    const handleLogout = ()=>{
+        setAuth(false)
+        navigate("/")
+    }
+
+    const handleCreateNotes = () =>{
+
+    }
   return (
     <Box
       h="8vh"
@@ -18,19 +32,13 @@ const Navbar = () => {
         <Image  src={logo} />
       </Box>
       <Box display="flex" columnGap="20px">
-        <Text
-          color="#888888"
-          fontSize="xl"
-          _hover={{ color: "#fff", cursor: "pointer" }}
-        >
-          Create Notes
-        </Text>
+        <CreateNotes/>
         <Text
           fontSize="xl"
           color="#888888"
-          _hover={{ color: "#fff", cursor: "pointer" }}
+          _hover={{ color: "gold", cursor: "pointer" }}
         >
-          Login
+          {auth ? <span onClick={handleLogout}>Log out</span> : <span>Log in</span> }
         </Text>
       </Box>
     </Box>

@@ -7,8 +7,10 @@ const notesRouter = require("./routes/noteRoutes");
 const {authenticate} = require("./middlewares/authenticate")
 require('dotenv').config()
 
-app.use(express.json());
+
 app.use(cors());
+app.use(express.json());
+
 
 app.use("/user", userRouter)
 app.use("/notes", authenticate, notesRouter)

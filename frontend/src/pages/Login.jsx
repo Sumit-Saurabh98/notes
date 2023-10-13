@@ -1,148 +1,170 @@
-import { Box, Container, Input, Text, Button, Center, Heading, InputGroup, InputRightElement, HStack, Stack, Divider, Icon } from "@chakra-ui/react";
-import React,{useState} from "react";
-import { BsFacebook, BsTwitch } from "react-icons/bs";
-import { AiFillGoogleCircle } from "react-icons/ai";
-import { FiEye, FiEyeOff } from "react-icons/fi";
-import { SiAccenture } from "react-icons/si";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import "../style/accountpage.css";
+import {
+  FormLabel,
+  Input,
+  Heading,
+  Checkbox,
+  Button,
+  ButtonGroup,
+  InputGroup,
+  InputRightElement,
+  Box,
+  FormControl,
+  Icon,
+  useToast,
+} from "@chakra-ui/react";
 
-function Login(props) {
-     const [show, setShow] = useState(false);
+import { useNavigate } from "react-router-dom";
+import { FiEye, FiEyeOff } from "react-icons/fi";
+import axios from "axios";
+import { AuthContext } from "../context/AuthContextProvider";
+
+const Login = () => {
+    const {setAuth} = useContext(AuthContext)
+  const toast = useToast();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const userData = { email, password };
+    console.log(userData);
+    try {
+      setLoading(true);
+      await axios
+        .post(`${process.env.REACT_APP_BASE_URL}/user/login`, userData)
+        .then((res) => {
+            localStorage.setItem("myToken", res.data.token);
+          setLoading(false);
+          setEmail("");
+          setPassword("");
+          setAuth(true)
+          toast({
+            title: "Login Success",
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+          });
+          navigate("/notes")
+        });
+    } catch (error) {
+      setLoading(false);
+      setEmail("");
+      setPassword("");
+      toast({
+        title: "Incorrect email or password",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+      });
+    }
+  };
+
   return (
-     <Container
-      style={{
-        backgroundImage:
-          "url(https://razerid-assets.razerzone.com/static/media/serpents-eye-v2-20220906.dae1e41f.jpg)",
-        backgroundPosition: "center top -150px",
-        height: "100vh", // move image 50px up from the center
-      }}
+    <Box
+      bg="#262626"
+      w="100vw"
+      h="100vh"
+      display="flex"
+      justifyContent="center"
     >
-      <Center>
-        <Box
-          border={"2px"}
-          borderColor={"green"}
-          mt="20px"
-          w="412px"
-          h="560px"
-          bg="#000000"
+      <Box
+        w={{ base: "90%", sm: "80%", md: "60%", lg: "40%" }}
+        p={{ base: "25px" }}
+      >
+        <Heading
+          fontWeight="600"
+          fontSize="32px"
+          color={"white"}
+          textAlign="center"
         >
-          <Heading
-            ml="20px"
-            my="30px"
-            as={"h1"}
-            fontWeight={"thin"}
-            color={"white"}
-            size="lg"
-          >
-            RAZER ID LOGIN
-          </Heading>
-          <form>
+          Sign in to your Account
+        </Heading>
+        <br />
+        <form onSubmit={handleSubmit} style={{ color: "white" }}>
+          <FormControl>
+            <FormLabel mb={"5px"}> Email </FormLabel>
             <Input
-              mb="20px"
-              width="375px"
-              ml={"20px"}
-              isRequired="true"
-              focusBorderColor="rgb(69,214,43)"
-              color={"white"}
+              id="email"
+              mb={"10px"}
               type="email"
-              placeholder="EMAIL ADDRESS"
-            ></Input>
+              placeholder="Email"
+              focusBorderColor="yellow.600"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <br />
+
+            <FormLabel mb={"5px"}> Password </FormLabel>
             <InputGroup size="md">
               <Input
-                width="375px"
-                ml={"20px"}
-                color={"white"}
-                focusBorderColor="rgb(69,214,43)"
-                pr="4.5rem"
+                id="password"
                 type={show ? "text" : "password"}
-                placeholder="Enter password"
+                placeholder="Password"
+                focusBorderColor="yellow.600"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <InputRightElement width="4.5rem">
                 <Button
-                  colorScheme="liquid"
                   h="1.75rem"
                   size="sm"
+                  colorScheme="yellow"
+                  onClick={handleClick}
                 >
-                  {show ? (
-                    <Icon boxSize={7} as={FiEye}></Icon>
-                  ) : (
-                    <Icon boxSize={7} as={FiEyeOff}></Icon>
-                  )}
+                  {show ? <Icon as={FiEye} /> : <Icon as={FiEyeOff} />}
                 </Button>
               </InputRightElement>
             </InputGroup>
-            <Text
-              _hover={{ color: "green" }}
-              cursor={"pointer"}
-              mt={2}
-              mr={5}
-              mb={8}
-              textAlign={"right"}
-              text
-              fontWeight={"light"}
-              color={"white"}
-            >
-              Forgot Password
-            </Text>
 
-            <Center>
-              <Button
-                colorScheme="green"
-                color="black"
-                px="160px"
-              >
-                LOG IN
+            <br />
+            <br />
+            <Box
+              className="item_display_corner"
+              mb={"10px"}
+              fontSize={{ base: "sm", sm: "md" }}
+            >
+              <div>
+                <Checkbox
+                  id="rememberMe"
+                  colorScheme="yellow"
+                  fontSize={{ base: "sm", sm: "md" }}
+                >
+                  Remember Me
+                </Checkbox>
+              </div>
+            </Box>
+            <br />
+            <ButtonGroup variant="outline" width="100%">
+              <Button type="submit" className="btn" colorScheme="yellow">
+                {loading ? "wait..." : "Sign in"}
               </Button>
-            </Center>
-            <Center>
-              <Text color={"white"} fontSize={"13px"} mb="20px" mt={8}>
-                Don't have an account yet?
-              </Text>
-            </Center>
-            <Center>
+            </ButtonGroup>
+
+            <br />
+            <br />
+            <ButtonGroup variant="outline" width="100%">
               <Button
-                _hover={{ color: "rgb(69,214,43)" }}
-                color={"white"}
-                rightIcon={<SiAccenture sixe="12px" />}
-                colorScheme="blue"
-                variant="unstyled"
+                onClick={() => navigate("/signup")}
+                className="btn"
+                colorScheme="yellow"
               >
-                <Link to={"/signup"}>Create Razer ID</Link>
+                Don't have an Account
               </Button>
-            </Center>
-            <HStack m="auto" w="380px" my={4}>
-              <Divider orientation="horizontal" />
-              <Text color={"#73767B"}>or</Text>
-              <Divider orientation="horizontal" />
-            </HStack>
-            <Stack ml="20px" mt="10px" mb="50px" direction="row" spacing={4}>
-              <Button
-                px="45px"
-                leftIcon={<BsFacebook boxSize="30" />}
-                colorScheme="facebook"
-                variant="solid"
-                aria-label="Facebook"
-              ></Button>
-              <Button
-                px="45px"
-                leftIcon={<AiFillGoogleCircle boxSize="30" />}
-                colorScheme="gray"
-                variant="solid"
-                aria-label="Google"
-              ></Button>
-              <Button
-                px="45px"
-                leftIcon={<BsTwitch boxSize="30" />}
-                colorScheme="purple"
-                variant="solid"
-                title="Twitch"
-              ></Button>
-            </Stack>
-          </form>
-        </Box>
-      </Center>
-    </Container>
+            </ButtonGroup>
+          </FormControl>
+        </form>
+      </Box>
+    </Box>
   );
-}
+};
 
 export default Login;
