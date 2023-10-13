@@ -2,7 +2,8 @@ const { Note } = require("../models/Note");
 
 const getNotes = async (req, res) => {
     try {
-        const notes = await Note.find().sort({ _id: -1 });
+        const id = req.userID
+        const notes = await Note.find({userId:id}).sort({ _id: -1 });
         res.status(200).send({ message: "Notes found", notes });
     } catch (error) {
         res.status(500).send({ message: "Internal server error", error });
@@ -36,8 +37,8 @@ const updateNote = async (req, res) => {
 }
 
 const deleteNote = async (req, res) => {
+    const id = req.params.id; 
     try {
-        const id = req.params.id; 
         const deletedNote = await Note.findByIdAndDelete(id); 
         res.status(200).send({ message: "Note deleted successfully", deletedNote });
     } catch (error) {
