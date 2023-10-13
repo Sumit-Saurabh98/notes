@@ -13,10 +13,6 @@ const Navbar = () => {
         setAuth(false)
         navigate("/")
     }
-
-    const handleCreateNotes = () =>{
-
-    }
   return (
     <Box
       h="8vh"

@@ -10,6 +10,16 @@ const getNotes = async (req, res) => {
     }
 }
 
+const getSingleNotes = async (req, res) => {
+    try {
+        const id = req.params.id; 
+        const singleNotes = await Note.findOne({_id: id});
+        res.status(200).send({ message: "Note found", singleNotes });
+    } catch (error) {
+        res.status(500).send({ message: "Internal server error", error });
+    }
+}
+
 const createNote = async (req, res) => {
     try {
         const { title, description } = req.body; 
@@ -46,4 +56,4 @@ const deleteNote = async (req, res) => {
     }
 }
 
-module.exports = {getNotes, createNote, updateNote, deleteNote}
+module.exports = {getNotes, createNote, updateNote, deleteNote, getSingleNotes}
