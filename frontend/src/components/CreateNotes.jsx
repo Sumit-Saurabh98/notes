@@ -50,7 +50,7 @@ function CreateNotes(props) {
     } catch (error) {
       setLoading(false);
       toast({
-        title: "Soothing wrong, Try again",
+        title: "Notes already Present with title",
         status: "error",
         duration: 2000,
         isClosable: true,
