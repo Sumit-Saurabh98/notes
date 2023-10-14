@@ -148,7 +148,7 @@ import axios from "axios"
             <br />
             <ButtonGroup variant="outline" width="100%">
               <Button type="submit" className="btn" colorScheme="yellow">
-                {loading ? "creating" : "Create Account"}
+                {loading ? "creating..." : "Create Account"}
               </Button>
             </ButtonGroup>
 

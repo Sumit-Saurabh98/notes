@@ -161,7 +161,7 @@ function SingleNotes(props) {
             </Button>
             <Button
               onClick={() => handleDelete(notesData._id)}
-              rightIcon={<MdDelete />}
+              leftIcon={<MdDelete />}
               colorScheme='orange'
               variant='solid'
             >
