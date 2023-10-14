@@ -1,6 +1,9 @@
 # Notes Application
 
-## Application deployed link(live):- https://notes-mocha-theta.vercel.app/
+## Application deployed link(live):- https://notes-mocha-theta.vercel.app/ <br/>
+application deployed link might be slow or sometime you face error because i am using free version of hosting.
+
+
 
 ### Steps to run the project locally
 
