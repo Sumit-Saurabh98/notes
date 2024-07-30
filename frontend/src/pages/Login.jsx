@@ -34,13 +34,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const userData = { email, password };
-    console.log(userData);
     try {
       setLoading(true);
       await axios
-        .post(`${process.env.REACT_APP_BASE_URL}/user/login`, userData)
+        .post(`http://localhost:3001/user/login`, userData, {withCredentials: true})
         .then((res) => {
-            localStorage.setItem("myToken", res.data.token);
           setLoading(false);
           setEmail("");
           setPassword("");

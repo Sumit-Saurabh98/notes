@@ -34,10 +34,9 @@ import axios from "axios"
   const handleSubmit = async (e) => {
   e.preventDefault();
   const userData = { email, password };
-  console.log(userData);
   try {
     setLoading(true)
-    await axios.post(`${process.env.REACT_APP_BASE_URL}/user/register`, userData)
+    await axios.post(`http://localhost:3001/user/register`, userData)
     .then(()=>{
     setLoading(false)
     setEmail("")

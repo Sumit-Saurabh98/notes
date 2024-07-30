@@ -4,12 +4,14 @@ import logo from "../logo/logo.png";
 import { AuthContext } from "../context/AuthContextProvider";
 import { useNavigate } from "react-router-dom";
 import CreateNotes from "./CreateNotes";
+import axios from "axios";
 
 const Navbar = () => {
     const navigate = useNavigate()
     const {auth, setAuth} = useContext(AuthContext)
 
-    const handleLogout = ()=>{
+    const handleLogout = async ()=>{
+       await axios.post("http://localhost:3001/user/logout", {}, {withCredentials: true})
         setAuth(false)
         navigate("/")
     }

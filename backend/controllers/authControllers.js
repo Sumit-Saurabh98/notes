@@ -21,31 +21,28 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(email, password);
     const user = await User.findOne({ email });
-    console.log(user);
     if (!user) {
       return res.status(401).send({ message: "User not found" });
     }
 
     const correct_password = await bcrypt.compare(password, user.password);
     if (correct_password) {
-      const jwt_token = jwt.sign({ userID: user._id }, "mysecretkey", {
+      const jwt_token = jwt.sign({ userID: user._id }, process.env.JWT_SECRET, {
         expiresIn: "1h",
       });
       // Set the token as an HTTP-only cookie
       res.cookie("token", jwt_token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-        maxAge: 3600000, // 1 hour
-        sameSite: "Strict", // or 'Lax', depending on your needs
-      });
+                httpOnly: true,
+                secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+                maxAge: 3600000, // 1 hour
+                sameSite: "Strict", // or 'Lax', depending on your needs
+            });
       return res.status(200).send({ message: "Login Successful" });
     } else {
       return res.status(401).send({ message: "Invalid credentials" });
     }
   } catch (error) {
-    console.error(error); // Log the error for debugging
     return res.status(500).send({ message: "Internal server error" });
   }
 };

@@ -9,12 +9,7 @@ function Notes(props) {
   const [loading, setLoading] = useState(true); 
   const getNotes = async () => {
     try {
-      const token = localStorage.getItem("myToken");
-      const { data } = await axios.get(`${process.env.REACT_APP_BASE_URL}/notes/get`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      const { data } = await axios.get(`http://localhost:3001/notes/get`, {withCredentials: true});
       setNotes(data.notes);
       setLoading(false); 
     } catch (error) {

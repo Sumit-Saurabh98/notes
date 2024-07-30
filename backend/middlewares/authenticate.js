@@ -3,17 +3,14 @@ const jwt = require("jsonwebtoken");
 
 const authenticate = async (req, res, next) => {
     try {
-        const token = req.cookies.token; // Get the token from cookies
-
-        console.log(token, "token")
+        const token = req.cookies.token; 
 
         if (!token) {
             return res.status(401).send("Please login");
         }
 
-        const decoded = jwt.verify(token, "mysecretkey");
-        console.log(decoded, "decoded value")
-        req.userID = decoded.userID; // Attach userID to the request
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.userID = decoded.userID; 
         next();
     } catch (error) {
         return res.status(500).send({ message: "Internal server error" });

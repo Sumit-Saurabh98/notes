@@ -17,12 +17,7 @@ function SingleNotes(props) {
 
   const getSingleNotes = async (id) => {
     try {
-      const token = localStorage.getItem("myToken");
-      const { data } = await axios.get(`${process.env.REACT_APP_BASE_URL}/notes/get/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
+      const { data } = await axios.get(`http://localhost:3001/notes/get/${id}`, {withCredentials: true});
       setNotesData(data.singleNotes);
       setEditedTitle(data.singleNotes.title);
       setEditedDescription(data.singleNotes.description);
@@ -37,14 +32,8 @@ function SingleNotes(props) {
 
   const handleDelete = async (id) => {
     try {
-      const token = localStorage.getItem("myToken");
-      await axios.delete(`${process.env.REACT_APP_BASE_URL}/notes/delete/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
+      await axios.delete(`http://localhost:3001/notes/delete/${id}`, {withCredentials: true})
         .then((res) => {
-          console.log(res);
           toast({
             title: "Notes deleted",
             status: "success",
@@ -71,15 +60,10 @@ function SingleNotes(props) {
 
   const handleSave = async () => {
     try {
-      const token = localStorage.getItem("myToken");
-      await axios.put(`${process.env.REACT_APP_BASE_URL}/notes/update/${id}`, {
+      await axios.put(`http://localhost:3001/notes/update/${id}`, {
         title: editedTitle,
         description: editedDescription
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      }).then(()=>{
+      }, {withCredentials: true}).then(()=>{
          toast({
         title: "Note updated",
         status: "success",

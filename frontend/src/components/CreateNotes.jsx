@@ -30,17 +30,11 @@ function CreateNotes(props) {
 
   const createNotes = async () => {
     const new_notes = { title, description };
-    const token = localStorage.getItem("myToken")
     try {
       setLoading(true);
       await axios
-        .post(`${process.env.REACT_APP_BASE_URL}/notes/create`, new_notes, {
-            headers:{
-                Authorization:`Bearer ${token}`
-            }
-        })
+        .post(`http://localhost:3001/notes/create`, new_notes, {withCredentials: true})
         .then((res) => {
-            console.log(res.data)
           setLoading(false);
           toast({
             title: "Notes Created",
