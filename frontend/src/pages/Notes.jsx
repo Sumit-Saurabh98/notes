@@ -9,7 +9,7 @@ function Notes(props) {
   const [loading, setLoading] = useState(true); 
   const getNotes = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:3001/notes/get`, {withCredentials: true});
+      const { data } = await axios.get(`http://localhost:8080/notes/get`, {withCredentials: true});
       setNotes(data.notes);
       setLoading(false); 
     } catch (error) {

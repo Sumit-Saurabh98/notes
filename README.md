@@ -19,7 +19,7 @@ application deployed link might be slow or sometime you face error because i am 
 Step 1:- go to the backend directory create a .env file and initialise these variables <br/> 
 MONGODB_URL = "you MongoDB DATABASE URL" <br/>
 PORT = 8080<br/>
-JWT_SECRET = razer-mern <br/>
+JWT_SECRET = tzynnevanemjsdudhdgh <br/>
 
 
 step 2:- in backend directory run <b>npm install</b> command <br/>
@@ -29,7 +29,7 @@ step 3:- in backend directory run <b>npm start</b> command <br/>
 step 4:- go to the frontend directory create a .env file and initialise these variables <br/>
 REACT_APP_BASE_URL = http://localhost:8080<br/>
 
-step 5:- in backend directory run <b>npm install</b> command <br/>
+step 5:- in frontend directory run <b>npm install</b> command <br/>
 
 step 6:- in frontend directory run <b>npm start</b> command <br/>
 

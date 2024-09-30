@@ -37,7 +37,7 @@ const Login = () => {
     try {
       setLoading(true);
       await axios
-        .post(`http://localhost:3001/user/login`, userData, {withCredentials: true})
+        .post(`http://localhost:8080/user/login`, userData, {withCredentials: true})
         .then((res) => {
           setLoading(false);
           setEmail("");

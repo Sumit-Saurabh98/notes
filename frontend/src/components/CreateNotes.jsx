@@ -33,7 +33,7 @@ function CreateNotes(props) {
     try {
       setLoading(true);
       await axios
-        .post(`http://localhost:3001/notes/create`, new_notes, {withCredentials: true})
+        .post(`http://localhost:8080/notes/create`, new_notes, {withCredentials: true})
         .then((res) => {
           setLoading(false);
           toast({
@@ -86,7 +86,7 @@ function CreateNotes(props) {
                   id="title"
                   mb={"10px"}
                   type="text"
-                  placeholder="Email"
+                  placeholder="Title"
                   focusBorderColor="yellow.600"
                   required
                   value={title}

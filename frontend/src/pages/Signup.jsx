@@ -36,7 +36,7 @@ import axios from "axios"
   const userData = { email, password };
   try {
     setLoading(true)
-    await axios.post(`http://localhost:3001/user/register`, userData)
+    await axios.post(`http://localhost:8080/user/register`, userData)
     .then(()=>{
     setLoading(false)
     setEmail("")

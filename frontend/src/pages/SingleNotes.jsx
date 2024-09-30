@@ -17,7 +17,7 @@ function SingleNotes(props) {
 
   const getSingleNotes = async (id) => {
     try {
-      const { data } = await axios.get(`http://localhost:3001/notes/get/${id}`, {withCredentials: true});
+      const { data } = await axios.get(`http://localhost:8080/notes/get/${id}`, {withCredentials: true});
       setNotesData(data.singleNotes);
       setEditedTitle(data.singleNotes.title);
       setEditedDescription(data.singleNotes.description);
@@ -32,7 +32,7 @@ function SingleNotes(props) {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3001/notes/delete/${id}`, {withCredentials: true})
+      await axios.delete(`http://localhost:8080/notes/delete/${id}`, {withCredentials: true})
         .then((res) => {
           toast({
             title: "Notes deleted",
@@ -60,7 +60,7 @@ function SingleNotes(props) {
 
   const handleSave = async () => {
     try {
-      await axios.put(`http://localhost:3001/notes/update/${id}`, {
+      await axios.put(`http://localhost:8080/notes/update/${id}`, {
         title: editedTitle,
         description: editedDescription
       }, {withCredentials: true}).then(()=>{

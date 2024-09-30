@@ -11,7 +11,7 @@ const Navbar = () => {
     const {auth, setAuth} = useContext(AuthContext)
 
     const handleLogout = async ()=>{
-       await axios.post("http://localhost:3001/user/logout", {}, {withCredentials: true})
+       await axios.post("http://localhost:8080/user/logout", {}, {withCredentials: true})
         setAuth(false)
         navigate("/")
     }
