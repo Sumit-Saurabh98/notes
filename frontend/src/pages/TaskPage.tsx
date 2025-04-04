@@ -35,7 +35,7 @@ const TaskPage = () => {
       <header className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-10">
         <div className="container mx-auto px-4">
           <h1 className="text-3xl font-bold">My Tasks</h1>
-          <p className="mt-2">Manage and organize your projects efficiently</p>
+          <p className="mt-2">Manage and organize your tasks efficiently</p>
         </div>
       </header>
       

@@ -71,7 +71,7 @@ const HomePage = () => {
                   </div>
                   <div>
                     <p className="font-semibold">Sarah Johnson</p>
-                    <p className="text-sm text-gray-600">Project Manager</p>
+                    <p className="text-sm text-gray-600">Task Manager</p>
                   </div>
                 </div>
               </div>
