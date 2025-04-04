@@ -115,13 +115,13 @@ const Login = () => {
                       />
                     </FormControl>
                     <div className="text-sm leading-none">
-                      Remember me for 30 days
+                      Remember me
                     </div>
                   </FormItem>
                 )}
               />
               
-              <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 mt-6">
+              <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 mt-6 cursor-pointer">
               {loginLoading ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 ) : (

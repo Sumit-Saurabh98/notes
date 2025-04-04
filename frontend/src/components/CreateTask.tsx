@@ -82,7 +82,7 @@ const CreateTask = () => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button className="bg-blue-600 hover:bg-blue-700">
+        <Button className="bg-blue-600 hover:bg-blue-700 cursor-pointer">
           <PlusCircle className="mr-2 h-4 w-4" />
            Add New Task
         </Button>
@@ -169,12 +169,12 @@ const CreateTask = () => {
             
             <AlertDialogFooter className="sm:justify-end gap-2 pt-4">
               <AlertDialogCancel asChild>
-                <Button type="button" variant="outline">
+                <Button type="button" variant="outline" className='bg-gray-600 hover:bg-gray-700 cursor-pointer'>
                   Cancel
                 </Button>
               </AlertDialogCancel>
               <AlertDialogAction asChild>
-                <Button type="submit" className="bg-blue-600 hover:bg-blue-700">
+                <Button type="submit" className="bg-blue-600 hover:bg-blue-700 cursor-pointer">
                 {isCreatingTask ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 ) : (

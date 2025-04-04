@@ -14,7 +14,7 @@ import EditTaskPage from "./pages/EditTaskPage";
 
 function App() {
   const { user, checkAuth, checkingAuth } = useAuthStore();
-  const { fetchAllTasks, isGettingTasks } = useTaskStore();
+  const { fetchAllTasks } = useTaskStore();
 
   useEffect(() => {
     checkAuth();

@@ -173,9 +173,9 @@ const EditTaskPage = () => {
             control={form.control}
             name="status"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="cursor-pointer">
                 <FormLabel>Status</FormLabel>
-                <Select onValueChange={field.onChange} value={field.value}>
+                <Select onValueChange={field.onChange} value={field.value} >
                   <FormControl>
                     <SelectTrigger>
                       <SelectValue placeholder="Select a status" />
@@ -196,7 +196,7 @@ const EditTaskPage = () => {
 
           <Button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700"
+            className="w-full bg-blue-600 hover:bg-blue-700 cursor-pointer"
           >
             {isUpdatingTask ? (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -208,7 +208,7 @@ const EditTaskPage = () => {
           <Button
             type="submit"
             variant={"secondary"}
-            className="w-full hover:bg-gray-300"
+            className="w-full hover:bg-gray-300 cursor-pointer"
           >
               Go Back
           </Button>

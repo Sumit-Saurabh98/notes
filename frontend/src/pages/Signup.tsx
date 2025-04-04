@@ -121,7 +121,7 @@ const Signup = () => {
                 )}
               />
               
-              <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 mt-6">
+              <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 mt-6 cursor-pointer">
                 {signUpLoading ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 ) : (

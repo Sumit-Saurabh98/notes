@@ -69,7 +69,7 @@ const TaskPage = () => {
               variant={statusFilter === 'all' ? 'default' : 'outline'}
               size="sm"
               onClick={() => setStatusFilter('all')}
-              className={statusFilter === 'all' ? 'bg-blue-600' : 'border-gray-300'}
+              className={statusFilter === 'all' ? 'bg-blue-600' : 'border-gray-300 cursor-pointer'}
             >
               All
             </Button>
@@ -77,7 +77,7 @@ const TaskPage = () => {
               variant={statusFilter === 'todo' ? 'default' : 'outline'}
               size="sm"
               onClick={() => setStatusFilter('todo')}
-              className={statusFilter === 'todo' ? 'bg-gray-600' : 'border-gray-300'}
+              className={statusFilter === 'todo' ? 'bg-gray-600' : 'border-gray-300 cursor-pointer'}
             >
               To Do
             </Button>
@@ -85,7 +85,7 @@ const TaskPage = () => {
               variant={statusFilter === 'ongoing' ? 'default' : 'outline'}
               size="sm"
               onClick={() => setStatusFilter('ongoing')}
-              className={statusFilter === 'ongoing' ? 'bg-purple-600' : 'border-gray-300'}
+              className={statusFilter === 'ongoing' ? 'bg-purple-600' : 'border-gray-300 cursor-pointer'}
             >
               In Progress
             </Button>
@@ -93,7 +93,7 @@ const TaskPage = () => {
               variant={statusFilter === 'completed' ? 'default' : 'outline'}
               size="sm"
               onClick={() => setStatusFilter('completed')}
-              className={statusFilter === 'completed' ? 'bg-blue-600' : 'border-gray-300'}
+              className={statusFilter === 'completed' ? 'bg-blue-600' : 'border-gray-300 cursor-pointer'}
             >
               Completed
             </Button>

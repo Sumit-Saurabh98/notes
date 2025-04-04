@@ -88,7 +88,7 @@ const TaskCard = ({ task }: { task: ITask }) => {
         {isTruncated && (
           <button
             onClick={() => setShowFullDescription(!showFullDescription)}
-            className="text-blue-600 text-sm mt-1 hover:underline"
+            className="text-blue-600 text-sm mt-1 hover:underline cursor-pointer"
           >
             {showFullDescription ? "Show less" : "Read more"}
           </button>
@@ -106,7 +106,7 @@ const TaskCard = ({ task }: { task: ITask }) => {
           <Button
             variant="outline"
             size="sm"
-            className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white flex-1"
+            className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white flex-1 cursor-pointer"
           >
             <Edit className="mr-2 h-4 w-4" />
             Edit
@@ -115,7 +115,7 @@ const TaskCard = ({ task }: { task: ITask }) => {
         <Button
           size="sm"
           variant={"destructive"}
-          className=" text-white hover:bg-red-700"
+          className=" text-white hover:bg-red-700 cursor-pointer"
           onClick={handleDeleteTask}
         >
           <Trash className="mr-2 h-4 w-4" />
