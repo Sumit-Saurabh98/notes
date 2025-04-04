@@ -7,9 +7,11 @@ import taskRoute from "./routes/taskRoutes.js"
 import authenticate from "./middlewares/authenticate.js";
 import cookieParser from 'cookie-parser';
 import dotenv from "dotenv";
+import path from "path";
 dotenv.config();
 
 const PORT = process.env.PORT || 8080;
+const __dirname = path.resolve();
 
 app.use(cookieParser()); // Cookie parser middleware
 app.use(cors({
@@ -24,9 +26,12 @@ app.use("/user", userRoute)
 // app.use("/user", authenticate, logoutRoute)
 app.use("/task", authenticate, taskRoute)
 
-app.use((req, res) => {
-    res.status(404).send({ message: 'Route not found' });
-});
+if(process.env.NODE_ENV === "production"){
+    app.use(express.static(path.join(__dirname, "frontend", "dist")));
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+    })
+}
 
 connection().then(()=>{
     try {

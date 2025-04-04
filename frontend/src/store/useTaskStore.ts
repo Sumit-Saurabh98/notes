@@ -17,7 +17,7 @@ export interface ITaskStore {
   deleteTask: (id: string) => Promise<boolean>
 }
 
-export const useTaskStore = create<ITaskStore>((set, get) => ({
+export const useTaskStore = create<ITaskStore>((set) => ({
   tasks: [],
   task: {
     _id: "",

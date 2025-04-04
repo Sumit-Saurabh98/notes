@@ -15,7 +15,7 @@ export interface IAuthStore {
   checkAuth: () => Promise<void>;
 }
 
-export const useAuthStore = create<IAuthStore>((set, get) => ({
+export const useAuthStore = create<IAuthStore>((set) => ({
   user: null,
   signUpLoading: false,
   loginLoading: false,
