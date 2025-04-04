@@ -1,27 +1,28 @@
-const express = require('express');
+import express from "express";
 const app = express();
-const cors = require('cors');
-const {connection} = require("./db/db");
-const userRouter = require('./routes/userRoute');
-const notesRouter = require("./routes/noteRoutes");
-const {authenticate} = require("./middlewares/authenticate")
-const cookieParser = require('cookie-parser');
-require('dotenv').config()
+import cors from "cors";
+import connection from "./db/db.js";
+import userRoute from "./routes/userRoute.js"
+import taskRoute from "./routes/taskRoutes.js"
+import authenticate from "./middlewares/authenticate.js";
+import cookieParser from 'cookie-parser';
+import dotenv from "dotenv";
+dotenv.config();
 
 const PORT = process.env.PORT || 8080;
 
 app.use(cookieParser()); // Cookie parser middleware
 app.use(cors({
-    origin: ['http://localhost:3000'],
+    origin: process.env.CLIENT_URL,
     credentials: true
 }));
 app.use(express.json()); // Middleware to parse JSON bodies
 
 
 
-app.use("/user", userRouter)
+app.use("/user", userRoute)
 // app.use("/user", authenticate, logoutRoute)
-app.use("/notes", authenticate, notesRouter)
+app.use("/task", authenticate, taskRoute)
 
 app.use((req, res) => {
     res.status(404).send({ message: 'Route not found' });
